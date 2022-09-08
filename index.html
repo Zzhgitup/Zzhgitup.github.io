@@ -1,7 +1,231 @@
-extends includes/layout.pug
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>个人博客V1.0 - 简单写写</title><meta name="keywords" content="赵子豪"><meta name="author" content="赵子豪"><meta name="copyright" content="赵子豪"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="个人博客V1.0">
+<meta property="og:url" content="http://example.com/">
+<meta property="og:site_name" content="个人博客V1.0">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:author" content="赵子豪">
+<meta property="article:tag" content="赵子豪">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '个人博客V1.0',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-09-08 11:32:43'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
-block content
-  include ./includes/mixins/post-ui.pug
-  #recent-posts.recent-posts
-    +postUI
-    include includes/pagination.pug
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">28</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><hr/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">个人博客V1.0</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">个人博客V1.0</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/2022/09/03/%E8%BF%AD%E4%BB%A3%E5%99%A8(iterator)%E5%8E%9F%E7%90%86/" title="迭代器(iterator)原理"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="迭代器(iterator)原理"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/09/03/%E8%BF%AD%E4%BB%A3%E5%99%A8(iterator)%E5%8E%9F%E7%90%86/" title="迭代器(iterator)原理">迭代器(iterator)原理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-09-03T02:38:50.000Z" title="Created 2022-09-03 10:38:50">2022-09-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">
+
+目录
+1.iterator介绍   
+2.itertor作用      
+3.iterator的遍历原理
+
+1.iterator介绍iterator是一种接口，为各种不同数据结构提供一种统一的访问机制，任何数据只要部署iterator接口，就可以完成遍历操作，
+2.itertor作用 iterator的作用有三个：一是为各种数据结构，提供一个统一的，简便的访问接口；二是使得数据结构的成员能够按照某种次序排列，三是ES6创造了一种新的遍历命令for···of循环，iterator接口主要供for···of消费
+3.iterator的遍历原理(1) 创建一个指针对象，指向当前数据结构的起始位置，也就是说，遍历器本质上是一个指针对象
+(2) 第一次调用指针对象的next 方法   可以将指针指向数据结构的第一个成员
+(3) 第二次调用指针对象的next方法   指针对象将指向数据结构的第二个成员
+(4) 不断调用指针对象的next方法， 直到它指向数据结构的结束位置，每一次调用next方法，都会返回数据结构的当前成员信息，具体来说就是返回一个包含value和done  两个属性的对象其中 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/08/14/%E5%9B%9E%E9%A1%BEexpress/" title="回顾express"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="回顾express"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/08/14/%E5%9B%9E%E9%A1%BEexpress/" title="回顾express">回顾express</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-08-14T00:34:12.000Z" title="Created 2022-08-14 08:34:12">2022-08-14</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a></span></div><div class="content">
+
+1.express 是什么Express 是一个基于 Node平台的Web应用开发框架，它提供了一系列的强大特性，帮助你创建各种Web应用。
+2 .Express 框架特性
+提供了简洁的路由定义方式
+对获取 http 请求参数进行了简化处理
+对模板引擎支持程度高，方便渲染动态HTML页面
+拥有中间件机制有效控制 HTTP 请求
+拥有大量第三方中间件对功能进行扩展
+
+3 .原生 node.js 与 Express 框架对比
+ 
+4.中间件 
+
+ 
+ 
+5  中间件应用路由保护：客户端在访问需要登录的页面时，可以先使用中间件判断用户登录状态，用户如果未登录，则拦截请求，直接响应，禁止用户进入需要登录的页面。
+错误处理中间件
+  本周还是对项目的完善，使之更加严谨可用，
+</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/08/07/%E6%8B%93%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%E6%98%AF%E6%B7%B1%E6%8B%B7%E8%B4%9D%E8%BF%98%E6%98%AF%E6%B5%85%E6%8B%B7%E8%B4%9D/" title="拓展运算符是深拷贝还是浅拷贝"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="拓展运算符是深拷贝还是浅拷贝"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/08/07/%E6%8B%93%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%E6%98%AF%E6%B7%B1%E6%8B%B7%E8%B4%9D%E8%BF%98%E6%98%AF%E6%B5%85%E6%8B%B7%E8%B4%9D/" title="拓展运算符是深拷贝还是浅拷贝">拓展运算符是深拷贝还是浅拷贝</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-08-07T02:39:55.000Z" title="Created 2022-08-07 10:39:55">2022-08-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a></span></div><div class="content">
+
+对于拓展运算符是深拷贝还是浅拷贝网上怎么说的都有，我就说一下我的理解。
+什么是深拷贝？什么是浅拷贝？
+假如B复制了A，修改A的时候，看B是否发生变化：
+如果B也跟着变了，说明是浅拷贝，拿别人手段！
+如果B没有改变，说明是深拷贝，自食其力！
+怎么判断拓展运算符是什么拷贝呢？
+看一下下面的例子：
+123456let a = [1,2,3]; let b = [...a]; console.log(b);//[1,2,3] a[1] = 4; console.log(a);//[1,4,3] console.log(b);//[1,2,3]
+
+结合浅拷贝和深拷贝的概念，那拓展运算符是不是深拷贝？别急看下面的例子：
+12345let peoples = [&#123;name:&#x27;zs&#x27;,age:18,sex:&quot;男&quot;&#125;,&#123;name:&#x27;ls&#x27;,age:16,sex:&quot;女&quot;&#125;];  let peoplesTwo = [...peoples];  peoples[0].age = 22;  ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/07/31/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E7%AF%87/" title="项目总结篇"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="项目总结篇"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/07/31/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E7%AF%87/" title="项目总结篇">项目总结篇</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-07-31T01:48:26.000Z" title="Created 2022-07-31 09:48:26">2022-07-31</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">
+
+        从开始项目到现在也快40天了，在这个过程中不得不说，交流真的很重要，要是交流多一点，项目估计早就完成了，找bug也找的差不多了，项目现在还有些功能不太完善，学分认证系统功能应该朝着实用性，和安全性出发，这是最重要的，还有交互体验很重要，能够简单明了的一眼看出网站的使用规则，而不是功能隐藏起来，轻松上手，快速使用。
+        项目bug正在修复，代码嵌入，功能失效·······啥的，正在改,还有交互体验上，各种信息的提示需要做出来，给用户足够的反馈信息。明白咋回事，
+        学习方面，主要还是项目经验吧，还有各种第三方工具的使用，接下来继续努力，加油
+</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/07/24/JS%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6URL%E8%B7%AF%E5%BE%84%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/" title="JS通过文件URL路径下载文件"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JS通过文件URL路径下载文件"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/07/24/JS%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6URL%E8%B7%AF%E5%BE%84%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/" title="JS通过文件URL路径下载文件">JS通过文件URL路径下载文件</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-07-24T08:39:55.000Z" title="Created 2022-07-24 16:39:55">2022-07-24</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a></span></div><div class="content">
+
+1234567891011121314151617181920212223242526272829303132333435363738394041const exportFile = (data, fileName, _this)=&gt;&#123;　// 地址不存在时，禁止操作  if(!data)return;  // 下载文件并保存到本地  const callback = (data)=&gt;&#123;　　 // 创建a标签，使用 html5 download 属性下载，    const link = document.createElement(&#x27;a&#x27;);　　 // 创建url对象    const objectUrl = window.URL.createObjectURL(new Blob([data]));    link.style.display=&#x27;none&#x27;;    link.href=objectUrl;　　 // 自定义文件名称， fileName　　 link.download = fileName; 　　 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/07/17/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="linux常用命令"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="linux常用命令"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/07/17/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="linux常用命令">linux常用命令</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-07-17T07:33:15.000Z" title="Created 2022-07-17 15:33:15">2022-07-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a></span></div><div class="content">
+
+一、基本命令1.1 关机和重启关机    shutdown -h now        立刻关机    shutdown -h 5        5分钟后关机    poweroff            立刻关机重启    shutdown -r now        立刻重启    shutdown -r 5        5分钟后重启    reboot                立刻重启
+1.2 帮助命令--help命令  shutdown --help：  ifconfig  --help：查看网卡信息 man命令（命令说明书）   man shutdown  注意：man shutdown打开命令说明书之后，使用按键q退出
+二、目录操作命令2.1 目录切换 cd命令：cd 目录
+cd /        切换到根目录cd /usr        切换到根目录下的usr目录cd ../        切换到上一级目录 或者  cd ..cd ~        切换到home目录cd -        切换到上次访问的目录
+2.2 目录查看 ls [-al]命令：ls [ ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/07/03/%E6%9C%AC%E5%91%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" title="本周学习总结"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="本周学习总结"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/07/03/%E6%9C%AC%E5%91%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" title="本周学习总结">本周学习总结</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-07-03T05:44:22.000Z" title="Created 2022-07-03 13:44:22">2022-07-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a></span></div><div class="content">
+
+        
+1使用 Bootstrap 构建快速、响应式布局的网站Bootstrap 是全球最流行的前端开源工具包，它支持 Sass 变量和 mixins、响应式网格系统、大量的预建组件和强大的 JavaScript 插件，助你快速设计和自定义响应式、移动设备优先的站点。
+** 2.布局容器**1234567&lt;div class=&quot;container-fluid&quot;&gt;	.container-fluid:横跨视口的全宽度的容器。&lt;/div&gt;&lt;div class=&quot;container&quot;&gt;    .container：有最大固定宽度的容器。最大固定宽度依据于视口（viewport）的断点（breakpoints）而不同。&lt;/div&gt;
+
+3.网格系统Bootstrap 4 网格系统有以下 5 个类:
+.col- 针对所有设备.col-sm- 平板 - 屏幕宽度等于或大于 576px.col-md- 桌面显示器 - 屏幕宽度等于或大于 768px).col-lg- 大桌面显示器 - 屏幕宽度等于或大于 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/06/26/%E6%9C%AC%E5%91%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="本周学习笔记"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="本周学习笔记"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/06/26/%E6%9C%AC%E5%91%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="本周学习笔记">本周学习笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-06-26T04:19:00.000Z" title="Created 2022-06-26 12:19:00">2022-06-26</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">
+
+一、node.js简介
+ 
+1.Node.js是一个能够在服务器端运行JavaScript的开放源代码、跨平台JavaScript运行环境。
+2.Node采用Google开发的V8引擎运行js代码，使用事件驱动、非阻塞和异步I/O模型等技术来提高性能，可优化应用程序的传输量和规模。
+3.Node大部分基本模块都用JavaScript编写。在Node出现之前，JS通常作为客户端程序设计语言使用，以JS写出的程序常在用户的浏览器上运行。
+3.目前，Node已被IBM、Microsoft、Yahoo!、Walmart、Groupon、SAP、 LinkedIn、Rakuten、PayPal、Voxer和GoDaddy等企业采用
+4.Node主要用于编写像Web服务器一样的网络应用，这和PHP和Python是类似的。
+但是Node与其他语言最大的不同之处在于，PHP等语言是阻塞的而Node是非阻塞的。
+Node是事件驱动的。开发者可以在不使用线程的情况下开发出一个能够承载高并发的服务器。其他服务器端语言难以开发高并发应用，而且即使开发出来，性能也不尽人意。
+Node正是在这个前提下被创造出 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/06/19/%E4%B8%80%E5%91%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" title="一周学习总结"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="一周学习总结"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/06/19/%E4%B8%80%E5%91%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" title="一周学习总结">一周学习总结</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-06-19T00:33:21.000Z" title="Created 2022-06-19 08:33:21">2022-06-19</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a></span></div><div class="content">
+
+这一周，按照学习计划学习了node.js及相关的内容，学习了一个简单的数据库，我感觉真的要是精通node.js那真的是非常厉害，几乎是想做什么就做什么，接下来我将会进行实践练习，加深理解，更加熟练的运用，该与对于项目结构的规范都要进行实践练习，
+        这段时间的学习，感觉到挺充实的，相比整天在家玩耍好得多，每天按时规律起床,晚上出去跑个步，其余时间用来敲代码我感觉还是很好的，我的许多同学都外出打工了，确实能挣到很多钱，但是他们的能力在原地踏步，不羡慕他们，加油提升自己更重要
+</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/06/11/PS%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" title="PS学习总结"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PS学习总结"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/06/11/PS%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" title="PS学习总结">PS学习总结</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2022-06-11T08:10:55.000Z" title="Created 2022-06-11 16:10:55">2022-06-11</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="content">
+
+        这周对PS进行了基础的学习，简单的操作，抠图，蒙版的使用，调色，各种工具的使用都应经学会了，其实PS大有可学，因为我不是专业的，仅仅学习了PS的一点皮毛，这些皮毛就已经够我用的了，这是用来找新做东西用的，希望我能够为招新做点什么，让宣传海报更加具有吸引力，
+        这周呢，在家学习感到是时间很是充足，想学什么都有时间，下一阶段要学习node.js这是一个用js做后端的一个基于V8的一个运行环境，感觉学完这个就能够自己做一整个项目了，既有前端，又有后端，我会更加努力的，这个的学习是对JS的基础的考验，平时会多看看红宝书，加强自己的基础知识，巩固一下，学好node.js,就想做什么就做什么了，自己一个人就能完成前后端的工作,加油，不过最近要把考试课复习一下，还有一场考试加油！
+</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><a class="page-number" href="/page/3/#content-inner">3</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">赵子豪</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">28</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">23</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/09/03/%E8%BF%AD%E4%BB%A3%E5%99%A8(iterator)%E5%8E%9F%E7%90%86/" title="迭代器(iterator)原理"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="迭代器(iterator)原理"/></a><div class="content"><a class="title" href="/2022/09/03/%E8%BF%AD%E4%BB%A3%E5%99%A8(iterator)%E5%8E%9F%E7%90%86/" title="迭代器(iterator)原理">迭代器(iterator)原理</a><time datetime="2022-09-03T02:38:50.000Z" title="Created 2022-09-03 10:38:50">2022-09-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/14/%E5%9B%9E%E9%A1%BEexpress/" title="回顾express"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="回顾express"/></a><div class="content"><a class="title" href="/2022/08/14/%E5%9B%9E%E9%A1%BEexpress/" title="回顾express">回顾express</a><time datetime="2022-08-14T00:34:12.000Z" title="Created 2022-08-14 08:34:12">2022-08-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/07/%E6%8B%93%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%E6%98%AF%E6%B7%B1%E6%8B%B7%E8%B4%9D%E8%BF%98%E6%98%AF%E6%B5%85%E6%8B%B7%E8%B4%9D/" title="拓展运算符是深拷贝还是浅拷贝"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="拓展运算符是深拷贝还是浅拷贝"/></a><div class="content"><a class="title" href="/2022/08/07/%E6%8B%93%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%E6%98%AF%E6%B7%B1%E6%8B%B7%E8%B4%9D%E8%BF%98%E6%98%AF%E6%B5%85%E6%8B%B7%E8%B4%9D/" title="拓展运算符是深拷贝还是浅拷贝">拓展运算符是深拷贝还是浅拷贝</a><time datetime="2022-08-07T02:39:55.000Z" title="Created 2022-08-07 10:39:55">2022-08-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/31/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E7%AF%87/" title="项目总结篇"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="项目总结篇"/></a><div class="content"><a class="title" href="/2022/07/31/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E7%AF%87/" title="项目总结篇">项目总结篇</a><time datetime="2022-07-31T01:48:26.000Z" title="Created 2022-07-31 09:48:26">2022-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/24/JS%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6URL%E8%B7%AF%E5%BE%84%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/" title="JS通过文件URL路径下载文件"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="JS通过文件URL路径下载文件"/></a><div class="content"><a class="title" href="/2022/07/24/JS%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6URL%E8%B7%AF%E5%BE%84%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/" title="JS通过文件URL路径下载文件">JS通过文件URL路径下载文件</a><time datetime="2022-07-24T08:39:55.000Z" title="Created 2022-07-24 16:39:55">2022-07-24</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">笔记</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%AE%B0%E5%BD%95/"><span class="card-category-list-name">记录</span><span class="card-category-list-count">22</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/%E7%AC%94%E8%AE%B0-ajax-javascript-%E5%89%8D%E7%AB%AF/" style="font-size: 1.1em; color: #999">笔记 ajax javascript 前端</a> <a href="/tags/%E7%AC%94%E8%AE%B0-css-%E5%89%8D%E7%AB%AF-html/" style="font-size: 1.1em; color: #999">笔记 css 前端 html</a> <a href="/tags/%E7%AC%94%E8%AE%B0-css3-html-%E5%89%8D%E7%AB%AF/" style="font-size: 1.1em; color: #999">笔记 css3 html 前端</a> <a href="/tags/%E7%AC%94%E8%AE%B0-git/" style="font-size: 1.1em; color: #999">笔记 git</a> <a href="/tags/%E7%AC%94%E8%AE%B0-html-%E5%89%8D%E7%AB%AF/" style="font-size: 1.1em; color: #999">笔记 html 前端</a> <a href="/tags/%E7%AC%94%E8%AE%B0-javascript/" style="font-size: 1.1em; color: #999">笔记 javascript</a> <a href="/tags/%E7%AC%94%E8%AE%B0-javascript-vue-js-%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/" style="font-size: 1.1em; color: #999">笔记 javascript vue.js 开发语言</a> <a href="/tags/%E7%AC%94%E8%AE%B0-javascript-%E5%89%8D%E7%AB%AF/" style="font-size: 1.1em; color: #999">笔记 javascript 前端</a> <a href="/tags/%E7%AC%94%E8%AE%B0-javascript-%E5%89%8D%E7%AB%AF-react-js/" style="font-size: 1.1em; color: #999">笔记 javascript 前端 react.js</a> <a href="/tags/%E7%AC%94%E8%AE%B0-javascript-%E5%89%8D%E7%AB%AF-%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/" style="font-size: 1.1em; color: #999">笔记 javascript 前端 开发语言</a> <a href="/tags/%E7%AC%94%E8%AE%B0-prototype/" style="font-size: 1.1em; color: #999">笔记 prototype</a> <a href="/tags/%E7%AC%94%E8%AE%B0-%E5%85%B6%E4%BB%96/" style="font-size: 1.3em; color: #99a1ac">笔记 其他</a> <a href="/tags/%E7%AC%94%E8%AE%B0-%E5%89%8D%E7%AB%AF/" style="font-size: 1.1em; color: #999">笔记 前端</a> <a href="/tags/%E7%AC%94%E8%AE%B0-%E5%89%8D%E7%AB%AF-css3-html/" style="font-size: 1.1em; color: #999">笔记 前端 css3 html</a> <a href="/tags/%E7%AC%94%E8%AE%B0-%E5%89%8D%E7%AB%AF-html-asp-net/" style="font-size: 1.1em; color: #999">笔记 前端 html asp.net</a> <a href="/tags/%E7%AC%94%E8%AE%B0-%E5%89%8D%E7%AB%AF-javascript/" style="font-size: 1.5em; color: #99a9bf">笔记 前端 javascript</a> <a href="/tags/%E7%AC%94%E8%AE%B0-%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 1.3em; color: #99a1ac">笔记 大数据</a> <a href="/tags/%E7%AC%94%E8%AE%B0-%E5%AD%A6%E4%B9%A0/" style="font-size: 1.1em; color: #999">笔记 学习</a> <a href="/tags/%E8%AE%B0%E5%BD%95-java-html-%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 1.1em; color: #999">记录 java html 服务器</a> <a href="/tags/%E8%AE%B0%E5%BD%95-javascript/" style="font-size: 1.1em; color: #999">记录 javascript</a> <a href="/tags/%E8%AE%B0%E5%BD%95-javascript-node-js/" style="font-size: 1.1em; color: #999">记录 javascript node.js</a> <a href="/tags/%E8%AE%B0%E5%BD%95-javascript-%E5%89%8D%E7%AB%AF/" style="font-size: 1.3em; color: #99a1ac">记录 javascript 前端</a> <a href="/tags/%E8%AE%B0%E5%BD%95-%E5%AD%A6%E4%B9%A0/" style="font-size: 1.1em; color: #999">记录 学习</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span><a class="card-more-btn" href="/archives/" title="More">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/09/"><span class="card-archive-list-date">September 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/08/"><span class="card-archive-list-date">August 2022</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/07/"><span class="card-archive-list-date">July 2022</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/06/"><span class="card-archive-list-date">June 2022</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/05/"><span class="card-archive-list-date">May 2022</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/04/"><span class="card-archive-list-date">April 2022</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/03/"><span class="card-archive-list-date">March 2022</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/02/"><span class="card-archive-list-date">February 2022</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">28</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-09-08T03:32:43.052Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By 赵子豪</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
