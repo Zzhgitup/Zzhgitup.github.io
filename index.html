@@ -91,7 +91,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/09/07/newpapername/" data-id="cl7rf8aie0001ogvdgv3da3d7" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/09/07/newpapername/" data-id="cl7sgh8st000ib0vde5yr8lf8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -140,7 +140,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/09/07/hello-world/" data-id="cl7rf8ai90000ogvd2x3a89ty" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/09/07/hello-world/" data-id="cl7sgh8sr000fb0vdhgdw9k5v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -150,25 +150,509 @@
 
 
   
+    <article id="post-迭代器(iterator)原理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/09/03/%E8%BF%AD%E4%BB%A3%E5%99%A8(iterator)%E5%8E%9F%E7%90%86/" class="article-date">
+  <time datetime="2022-09-03T02:38:50.000Z" itemprop="datePublished">2022-09-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+  </div>
 
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/09/03/%E8%BF%AD%E4%BB%A3%E5%99%A8(iterator)%E5%8E%9F%E7%90%86/">迭代器(iterator)原理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+
+<p><strong>目录</strong></p>
+<p><a href="#1.iterator%E4%BB%8B%E7%BB%8D%C2%A0%20%C2%A0">1.iterator介绍   </a></p>
+<p><a href="#2.itertor%E4%BD%9C%E7%94%A8%C2%A0%20%C2%A0%20%C2%A0%C2%A0">2.itertor作用      </a></p>
+<p><a href="#3.iterator%E7%9A%84%E9%81%8D%E5%8E%86%E5%8E%9F%E7%90%86">3.iterator的遍历原理</a></p>
+<hr>
+<h2 id="1-iterator介绍"><a href="#1-iterator介绍" class="headerlink" title="1.iterator介绍"></a>1.iterator介绍</h2><p>iterator是一种接口，为各种不同数据结构提供一种统一的访问机制，任何数据只要部署iterator接口，就可以完成遍历操作，</p>
+<h2 id="2-itertor作用"><a href="#2-itertor作用" class="headerlink" title="2.itertor作用"></a><strong>2.itertor作用</strong></h2><p> iterator的作用有三个：一是为各种数据结构，提供一个统一的，简便的访问接口；二是使得数据结构的成员能够按照某种次序排列，三是ES6创造了一种新的遍历命令for···of循环，iterator接口主要供for···of消费</p>
+<h2 id="3-iterator的遍历原理"><a href="#3-iterator的遍历原理" class="headerlink" title="3.iterator的遍历原理"></a>3.iterator的遍历原理</h2><p>(1) 创建一个指针对象，指向当前数据结构的起始位置，也就是说，遍历器本质上是一个指针对象</p>
+<p>(2) 第一次调用指针对象的next 方法   可以将指针指向数据结构的第一个成员</p>
+<p>(3) 第二次调用指针对象的next方法   指针对象将指向数据结构的第二个成员</p>
+<p>(4) 不断调用指针对象的next方法， 直到它指向数据结构的结束位置，每一次调用next方法，都会返回数据结构的当前成员信息，具体来说就是返回一个包含value和done  两个属性的对象其中value是当前成员的值，done属性是一个布尔值  ，表示遍历是否结束</p>
+<p><strong>模拟例子</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> it = <span class="title function_">makeIterator</span>([<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>]);</span><br><span class="line">it.<span class="title function_">next</span>() <span class="comment">// &#123; value: &quot;a&quot;, done: false &#125;</span></span><br><span class="line">it.<span class="title function_">next</span>() <span class="comment">// &#123; value: &quot;b&quot;, done: false &#125;</span></span><br><span class="line">it.<span class="title function_">next</span>() <span class="comment">// &#123; value: undefined, done: true &#125;</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">makeIterator</span>(<span class="params">array</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> nextIndex = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">next</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> nextIndex &lt; array.<span class="property">length</span> ?</span><br><span class="line">        &#123;<span class="attr">value</span>: array[nextIndex++], <span class="attr">done</span>: <span class="literal">false</span>&#125; :</span><br><span class="line">        &#123;<span class="attr">value</span>: <span class="literal">undefined</span>, <span class="attr">done</span>: <span class="literal">true</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>makeIterator是一个迭代器生成函数，作用就是返回一个遍历器对象，对数组[‘a’,’b’]  执行这个函数</p>
+<p>返回该数组的迭代器对象（即指针对象）</p>
+<p> 2021字节跳动web工程师笔试题</p>
+<h2 id="第一题"><a href="#第一题" class="headerlink" title="第一题"></a>第一题</h2><blockquote>
+<p>[<br>{num: 12, city: ‘beijing’},<br>{num: 56, city: ‘shanghai’},<br>{num: 167, city: ‘guangzhou’},<br>{num: 23, city: ‘shenzhen’},<br>{num: 45, city: ‘caoxian’}<br>]<br>写一个方法实现把上面的数组转换成下面这种格式：<br>{beijing: 12, shanghai: 56,…}</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = [</span><br><span class="line">           &#123;<span class="attr">num</span>: <span class="number">12</span>, <span class="attr">city</span>: <span class="string">&#x27;beijing&#x27;</span>&#125;,</span><br><span class="line">           &#123;<span class="attr">num</span>: <span class="number">56</span>, <span class="attr">city</span>: <span class="string">&#x27;shanghai&#x27;</span>&#125;,</span><br><span class="line">           &#123;<span class="attr">num</span>: <span class="number">167</span>, <span class="attr">city</span>: <span class="string">&#x27;guangzhou&#x27;</span>&#125;,</span><br><span class="line">           &#123;<span class="attr">num</span>: <span class="number">23</span>, <span class="attr">city</span>: <span class="string">&#x27;shenzhen&#x27;</span>&#125;,</span><br><span class="line">           &#123;<span class="attr">num</span>: <span class="number">45</span>, <span class="attr">city</span>: <span class="string">&#x27;caoxian&#x27;</span>&#125;</span><br><span class="line">               ]</span><br><span class="line">           <span class="keyword">let</span> res=&#123;&#125;</span><br><span class="line">           <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;obj.<span class="property">length</span>;i++)&#123;</span><br><span class="line">               res[obj[i].<span class="property">city</span>]=obj[i].<span class="property">num</span></span><br><span class="line">           &#125;</span><br><span class="line">           <span class="variable language_">console</span>.<span class="title function_">log</span>(res);</span><br></pre></td></tr></table></figure>
+
+<p>遍历数组添加到对象就行了</p>
+<p>        本周主要进行了复习，对JS基础  JS高级  ES6进行了回顾  剩余时间在学习Vue  加油！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/09/03/%E8%BF%AD%E4%BB%A3%E5%99%A8(iterator)%E5%8E%9F%E7%90%86/" data-id="cl7sgh8to002lb0vd68i0h5g3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%B0%E5%BD%95-javascript-%E5%89%8D%E7%AB%AF/" rel="tag">记录 javascript 前端</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-回顾express" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/08/14/%E5%9B%9E%E9%A1%BEexpress/" class="article-date">
+  <time datetime="2022-08-14T00:34:12.000Z" itemprop="datePublished">2022-08-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/08/14/%E5%9B%9E%E9%A1%BEexpress/">回顾express</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+
+<h2 id="1-express-是什么"><a href="#1-express-是什么" class="headerlink" title="1.express 是什么"></a>1.express 是什么</h2><p>Express 是一个基于 <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=Node&spm=1001.2101.3001.7020" title="Node">Node</a>平台的Web应用开发框架，它提供了一系列的强大特性，帮助你创建各种Web应用。</p>
+<h2 id="2-Express-框架特性"><a href="#2-Express-框架特性" class="headerlink" title="2 .Express 框架特性"></a>2 .Express 框架特性</h2><ul>
+<li>提供了<strong>简洁的路由定义</strong>方式</li>
+<li>对获取 http <strong>请求参数</strong>进行了<strong>简化处理</strong></li>
+<li>对<strong>模板引擎支持程度高</strong>，方便渲染动态HTML页面</li>
+<li>拥有<strong>中间件</strong>机制有效<strong>控制 HTTP 请求</strong></li>
+<li>拥有大量第三方中间件对功能进行扩展</li>
+</ul>
+<h2 id="3-原生-node-js-与-Express-框架对比"><a href="#3-原生-node-js-与-Express-框架对比" class="headerlink" title="3 .原生 node.js 与 Express 框架对比"></a>3 .原生 node.js 与 Express 框架对比</h2><p><img src="https://img-blog.csdnimg.cn/422f6da8b6d34336ae69e70859163419.png" alt="422f6da8b6d34336ae69e70859163419.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/e9c435389c0542b5b5da8e592be66431.png" alt="e9c435389c0542b5b5da8e592be66431.png"> </p>
+<h2 id="4-中间件"><a href="#4-中间件" class="headerlink" title="4.中间件"></a>4.中间件</h2><p> </p>
+<p><img src="https://img-blog.csdnimg.cn/55bd7475882742339b921dc03a8d95e8.png" alt="55bd7475882742339b921dc03a8d95e8.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/647096f6d82246239deb7a99732285b2.png" alt="647096f6d82246239deb7a99732285b2.png"> </p>
+<p><img src="https://img-blog.csdnimg.cn/27cf49b6412f40669e23658c0d81748b.png" alt="27cf49b6412f40669e23658c0d81748b.png"> </p>
+<h2 id="5-中间件应用"><a href="#5-中间件应用" class="headerlink" title="5  中间件应用"></a>5  中间件应用</h2><h3 id="路由保护："><a href="#路由保护：" class="headerlink" title="路由保护："></a>路由保护：</h3><p>客户端在访问需要登录的页面时，可以先使用中间件判断用户登录状态，用户如果未登录，则拦截请求，直接响应，禁止用户进入需要登录的页面。</p>
+<p>错误处理中间件</p>
+<p>  本周还是对项目的完善，使之更加严谨可用，</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/08/14/%E5%9B%9E%E9%A1%BEexpress/" data-id="cl7sgh8t40016b0vd162u075k" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-javascript/" rel="tag">笔记 javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-拓展运算符是深拷贝还是浅拷贝" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/08/07/%E6%8B%93%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%E6%98%AF%E6%B7%B1%E6%8B%B7%E8%B4%9D%E8%BF%98%E6%98%AF%E6%B5%85%E6%8B%B7%E8%B4%9D/" class="article-date">
+  <time datetime="2022-08-07T02:39:55.000Z" itemprop="datePublished">2022-08-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/08/07/%E6%8B%93%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%E6%98%AF%E6%B7%B1%E6%8B%B7%E8%B4%9D%E8%BF%98%E6%98%AF%E6%B5%85%E6%8B%B7%E8%B4%9D/">拓展运算符是深拷贝还是浅拷贝</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+
+<p>对于拓展运算符是深拷贝还是浅拷贝网上怎么说的都有，我就说一下我的理解。</p>
+<p><strong>什么是深拷贝？什么是浅拷贝？</strong></p>
+<p>假如B复制了A，修改A的时候，看B是否发生变化：</p>
+<p>如果B也跟着<strong>变</strong>了，说明是浅拷贝，拿别人手段！</p>
+<p>如果B<strong>没有改变</strong>，说明是深拷贝，自食其力！</p>
+<p><strong>怎么判断拓展运算符是什么拷贝呢？</strong></p>
+<p>看一下下面的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line"> <span class="keyword">let</span> b = [...a];</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(b);<span class="comment">//[1,2,3]</span></span><br><span class="line"> a[<span class="number">1</span>] = <span class="number">4</span>;</span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(a);<span class="comment">//[1,4,3]</span></span><br><span class="line"> <span class="variable language_">console</span>.<span class="title function_">log</span>(b);<span class="comment">//[1,2,3]</span></span><br></pre></td></tr></table></figure>
+
+<p>结合浅拷贝和深拷贝的概念，那拓展运算符是不是深拷贝？别急看下面的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> peoples = [&#123;<span class="attr">name</span>:<span class="string">&#x27;zs&#x27;</span>,<span class="attr">age</span>:<span class="number">18</span>,<span class="attr">sex</span>:<span class="string">&quot;男&quot;</span>&#125;,&#123;<span class="attr">name</span>:<span class="string">&#x27;ls&#x27;</span>,<span class="attr">age</span>:<span class="number">16</span>,<span class="attr">sex</span>:<span class="string">&quot;女&quot;</span>&#125;];</span><br><span class="line">  <span class="keyword">let</span> peoplesTwo = [...peoples];</span><br><span class="line">  peoples[<span class="number">0</span>].<span class="property">age</span> = <span class="number">22</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(peoples);<span class="comment">//[&#123;name:&#x27;zs&#x27;,age:22,sex:&quot;男&quot;&#125;,&#123;name:&#x27;ls&#x27;,age:16,sex:&quot;女&quot;&#125;]</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(peoplesTwo);<span class="comment">//[&#123;name:&#x27;zs&#x27;,age:22,sex:&quot;男&quot;&#125;,&#123;name:&#x27;ls&#x27;,age:16,sex:&quot;女&quot;&#125;]</span></span><br></pre></td></tr></table></figure>
+
+<p>结合浅拷贝和深拷贝的概念，那拓展运算符是不是浅拷贝？</p>
+<p>所以结合上面两个例子得出一个结论，拓展运算符是深拷贝还是浅拷贝是看具体拷贝内容的，当拷贝的内容只有一层时是深拷贝，层数很多时时浅拷贝，如果还是不太理解可以先看深拷贝和浅拷贝的定义然后自己手敲一下代码，</p>
+<p>        加油</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/08/07/%E6%8B%93%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%E6%98%AF%E6%B7%B1%E6%8B%B7%E8%B4%9D%E8%BF%98%E6%98%AF%E6%B5%85%E6%8B%B7%E8%B4%9D/" data-id="cl7sgh8t6001cb0vdezuufm4x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-javascript-vue-js-%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/" rel="tag">笔记 javascript vue.js 开发语言</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-项目总结篇" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/07/31/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E7%AF%87/" class="article-date">
+  <time datetime="2022-07-31T01:48:26.000Z" itemprop="datePublished">2022-07-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/07/31/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E7%AF%87/">项目总结篇</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+
+<p>        从开始项目到现在也快40天了，在这个过程中不得不说，交流真的很重要，要是交流多一点，项目估计早就完成了，找bug也找的差不多了，项目现在还有些功能不太完善，学分认证系统功能应该朝着实用性，和安全性出发，这是最重要的，还有交互体验很重要，能够简单明了的一眼看出网站的使用规则，而不是功能隐藏起来，轻松上手，快速使用。</p>
+<p>        项目bug正在修复，代码嵌入，功能失效·······啥的，正在改,还有交互体验上，各种信息的提示需要做出来，给用户足够的反馈信息。明白咋回事，</p>
+<p>        学习方面，主要还是项目经验吧，还有各种第三方工具的使用，接下来继续努力，加油</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/07/31/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93%E7%AF%87/" data-id="cl7sgh8tq002ob0vd0pd87gj9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%B0%E5%BD%95-java-html-%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">记录 java html 服务器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JS通过文件URL路径下载文件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/07/24/JS%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6URL%E8%B7%AF%E5%BE%84%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/" class="article-date">
+  <time datetime="2022-07-24T08:39:55.000Z" itemprop="datePublished">2022-07-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/07/24/JS%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6URL%E8%B7%AF%E5%BE%84%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/">JS通过文件URL路径下载文件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="variable">exportFile</span> <span class="operator">=</span> (data, fileName, _this)=&gt;&#123;</span><br><span class="line">　<span class="comment">// 地址不存在时，禁止操作</span></span><br><span class="line">  <span class="keyword">if</span>(!data)<span class="keyword">return</span>;</span><br><span class="line">  <span class="comment">// 下载文件并保存到本地</span></span><br><span class="line">  <span class="type">const</span> <span class="variable">callback</span> <span class="operator">=</span> (data)=&gt;&#123;</span><br><span class="line">　　 <span class="comment">// 创建a标签，使用 html5 download 属性下载，</span></span><br><span class="line">    <span class="type">const</span> <span class="variable">link</span> <span class="operator">=</span> document.createElement(<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">　　 <span class="comment">// 创建url对象</span></span><br><span class="line">    <span class="type">const</span> <span class="variable">objectUrl</span> <span class="operator">=</span> window.URL.createObjectURL(<span class="keyword">new</span> <span class="title class_">Blob</span>([data]));</span><br><span class="line">    link.style.display=<span class="string">&#x27;none&#x27;</span>;</span><br><span class="line">    link.href=objectUrl;</span><br><span class="line">　　 <span class="comment">// 自定义文件名称， fileName</span></span><br><span class="line">　　 link.download = fileName; </span><br><span class="line">　　 document.body.appendChild(link); </span><br><span class="line">　　 link.click();</span><br><span class="line">　　 <span class="comment">// 适当释放url</span></span><br><span class="line">    window.URL.revokeObjectURL(objectUrl);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="comment">// 把接口返回的url地址转换为 blob</span></span><br><span class="line">  <span class="type">const</span> <span class="variable">xhr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">  xhr.open(<span class="string">&#x27;get&#x27;</span>, data, <span class="literal">true</span>);</span><br><span class="line">  xhr.responseType = <span class="string">&#x27;blob&#x27;</span>;</span><br><span class="line">  xhr.onload = ()=&gt; &#123;</span><br><span class="line">　　 <span class="comment">// 返回文件流，进行下载处理</span></span><br><span class="line">    callback(xhr.response);</span><br><span class="line">  &#125;;</span><br><span class="line">  xhr.send(); <span class="comment">// 不要忘记发送</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ie和浏览器兼容模式会有问题，可以用下面代码调试。</span></span><br><span class="line">　<span class="keyword">try</span>&#123;</span><br><span class="line">    exportFile(); <span class="comment">// 调用方式</span></span><br><span class="line">  &#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">    <span class="comment">// 兼容模式下，IE</span></span><br><span class="line">    <span class="type">const</span> <span class="variable">exportBlob</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Blob</span>([data]);</span><br><span class="line">    <span class="keyword">if</span> (navigator.userAgent.indexOf(<span class="string">&#x27;Trident&#x27;</span>) &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">      window.navigator.msSaveBlob(data, fileName);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      exportFile(); <span class="comment">// 调用方式</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>调用方式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">exportFile</span>(<span class="string">&#x27;https://reading.oss.iyougu.com/uploads/mp/opus/1c5a8b6a391742cf93595d0a506b2d43.mp3&#x27;</span>, <span class="string">&#x27;测试.mp3&#x27;</span>);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/07/24/JS%E9%80%9A%E8%BF%87%E6%96%87%E4%BB%B6URL%E8%B7%AF%E5%BE%84%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6/" data-id="cl7sgh8sk0005b0vd5pm2ep2a" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-javascript-%E5%89%8D%E7%AB%AF-%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/" rel="tag">笔记 javascript 前端 开发语言</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux常用命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/07/17/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time datetime="2022-07-17T07:33:15.000Z" itemprop="datePublished">2022-07-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/07/17/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">linux常用命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+
+<p><strong>一、基本命令</strong><br>1.1 关机和重启<br>关机<br>    shutdown -h now        立刻关机<br>    shutdown -h 5        5分钟后关机<br>    poweroff            立刻关机<br>重启<br>    shutdown -r now        立刻重启<br>    shutdown -r 5        5分钟后重启<br>    reboot                立刻重启</p>
+<h2 id="1-2-帮助命令"><a href="#1-2-帮助命令" class="headerlink" title="1.2 帮助命令"></a>1.2 帮助命令</h2><p>--help命令<br>  shutdown --help：<br>  ifconfig  --help：查看网卡信息<br> <br>man命令（命令说明书） <br>  man shutdown<br>  注意：man shutdown打开命令说明书之后，使用按键q退出</p>
+<p><strong>二、目录操作命令</strong><br>2.1 目录切换 cd<br>命令：cd 目录</p>
+<p>cd /        切换到根目录<br>cd /usr        切换到根目录下的usr目录<br>cd ../        切换到上一级目录 或者  cd ..<br>cd ~        切换到home目录<br>cd -        切换到上次访问的目录</p>
+<p><strong>2.2 目录查看 ls [-al]</strong><br>命令：ls [-al]</p>
+<p>ls                查看当前目录下的所有目录和文件<br>ls -a            查看当前目录下的所有目录和文件（包括隐藏的文件）<br>ls -l 或 ll       列表查看当前目录下的所有目录和文件（列表查看，显示更多信息）<br>ls /dir            查看指定目录下的所有目录和文件   如：ls /usr</p>
+<p><strong>2.3 目录操作【增，删，改，查】</strong><br>2.3.1 创建目录【增】 mkdir<br>命令：mkdir 目录</p>
+<p>mkdir    aaa            在当前目录下创建一个名为aaa的目录<br>mkdir    /usr/aaa    在指定目录下创建一个名为aaa的目录</p>
+<p><strong>2.3.2 删除目录或文件【删】rm</strong><br>命令：rm [-rf] 目录</p>
+<p>删除文件：<br>rm 文件        删除当前目录下的文件<br>rm -f 文件    删除当前目录的的文件（不询问）</p>
+<p>删除目录：<br>rm -r aaa    递归删除当前目录下的aaa目录<br>rm -rf aaa    递归删除当前目录下的aaa目录（不询问）</p>
+<p>全部删除：<br>rm -rf *    将当前目录下的所有目录和文件全部删除<br>rm -rf /*    【自杀命令！慎用！慎用！慎用！】将根目录下的所有文件全部删除</p>
+<p>注意：rm不仅可以删除目录，也可以删除其他文件或压缩包，为了方便大家的记忆，无论删除任何目录或文件，都直接使用 rm -rf 目录/文件/压缩包  
+ </p>
+<p>正在学习，，，</p>
+<p>本周呢，还是以项目为主又完成了一些功能，马上就能做完了，加油</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/07/17/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="cl7sgh8sp000bb0vd4puofnrz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">笔记 大数据</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-本周学习总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/07/03/%E6%9C%AC%E5%91%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" class="article-date">
+  <time datetime="2022-07-03T05:44:22.000Z" itemprop="datePublished">2022-07-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/07/03/%E6%9C%AC%E5%91%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/">本周学习总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+
+<p>        </p>
+<h2 id="1使用-Bootstrap-构建快速、响应式布局的网站"><a href="#1使用-Bootstrap-构建快速、响应式布局的网站" class="headerlink" title="1使用 Bootstrap 构建快速、响应式布局的网站"></a><strong>1使用 Bootstrap 构建快速、响应式布局的网站</strong></h2><p><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=Bootstrap&spm=1001.2101.3001.7020" title="Bootstrap">Bootstrap</a> 是全球最流行的前端开源工具包，它支持 Sass 变量和 mixins、响应式网格系统、大量的预建组件和强大的 JavaScript 插件，助你快速设计和自定义响应式、移动设备优先的站点。</p>
+<h2 id="2-布局容器"><a href="#2-布局容器" class="headerlink" title="** 2.布局容器**"></a>** 2.布局容器**</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="keyword">class</span>=<span class="string">&quot;container-fluid&quot;</span>&gt;</span><br><span class="line">	.<span class="property">container</span>-<span class="attr">fluid</span>:横跨视口的全宽度的容器。</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    .container：有最大固定宽度的容器。最大固定宽度依据于视口（viewport）的断点（breakpoints）而不同。</span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-网格系统"><a href="#3-网格系统" class="headerlink" title="3.网格系统"></a>3.网格系统</h2><p>Bootstrap 4 网格系统有以下 5 个类:</p>
+<p>.col- 针对所有设备<br>.col-sm- 平板 - 屏幕宽度等于或大于 576px<br>.col-md- 桌面显示器 - 屏幕宽度等于或大于 768px)<br>.col-lg- 大桌面显示器 - 屏幕宽度等于或大于 992px)<br>.col-xl- 超大桌面显示器 - 屏幕宽度等于或大于 1200px)<br>        这周主要就是学习使用了<strong>Bootstrap5</strong> 写网页，学习了使用axios 对第三方接口进行请求，统一配置请求头，请求拦截器，响应拦截器，对错误代码同意管理，接下来就是尽量熟练的使用axios,完成交互任务，��数据做点什么<br>    return response;<br>  }, function (error) {<br>    // 对响应错误做点什么<br>    return Promise.reject(error);<br>  });<br>```</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/07/03/%E6%9C%AC%E5%91%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/" data-id="cl7sgh8t6001fb0vd7djhcfnr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">笔记 大数据</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-本周学习笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/06/26/%E6%9C%AC%E5%91%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time datetime="2022-06-26T04:19:00.000Z" itemprop="datePublished">2022-06-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/06/26/%E6%9C%AC%E5%91%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">本周学习笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <span id="more"></span>
+
+<p>一、node.js简介</p>
+<p> </p>
+<p>1.Node.js是一个能够在服务器端运行JavaScript的开放源代码、跨平台JavaScript运行环境。</p>
+<p>2.Node采用Google开发的V8引擎运行js代码，使用事件驱动、非阻塞和异步I/O模型等技术来提高性能，可优化应用程序的传输量和规模。</p>
+<p>3.Node大部分基本模块都用JavaScript编写。在Node出现之前，JS通常作为客户端程序设计语言使用，以JS写出的程序常在用户的浏览器上运行。</p>
+<p>3.目前，Node已被IBM、Microsoft、Yahoo!、Walmart、Groupon、SAP、 LinkedIn、Rakuten、PayPal、Voxer和GoDaddy等企业采用</p>
+<p>4.Node主要用于编写像Web服务器一样的网络应用，这和PHP和Python是类似的。</p>
+<p>但是Node与其他语言最大的不同之处在于，PHP等语言是阻塞的而Node是非阻塞的。</p>
+<p>Node是事件驱动的。开发者可以在不使用线程的情况下开发出一个能够承载高并发的服务器。其他服务器端语言难以开发高并发应用，而且即使开发出来，性能也不尽人意。</p>
+<p>Node正是在这个前提下被创造出来。</p>
+<p>Node把JS的易学易用和Unix网络编程的强大结合到了一起。</p>
+<p>5.Node.js允许通过JS和一系列模块来编写服务器端应用和网络相关的应用。</p>
+<p>6.核心模块包括文件系统I/O、网络（HTTP、TCP、UDP、DNS、TLS/SSL等）、二进制数据流、加密算法、数据流等等。Node模块的API形式简单，降低了编程的复杂度。</p>
+<p>7.使用框架可以加速开发。常用的框架有Express.js、Socket.IO和Connect等。Node.js的程序可以在Microsoft Windows、Linux、Unix、Mac OS X等服务器上运行。</p>
+<p>8.Node.js也可以使用CoffeeScript、TypeScript、Dart语言，以及其他能够编译成JavaScript的语言编程。</p>
+<p>二.Node.Js用途</p>
+<p> </p>
+<p>1.Web服务API，比如REST</p>
+<p>实时多人游戏</p>
+<p>2.后端的Web服务，例如跨域、服务器端的请求</p>
+<p>3.基于Web的应用</p>
+<p>多客户端的通信，如即时通信</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/06/26/%E6%9C%AC%E5%91%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" data-id="cl7sgh8t8001ib0vdeot94rg2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%B0%E5%BD%95-javascript-node-js/" rel="tag">记录 javascript node.js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+  </nav>
 
 </section>
         
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-ajax-javascript-%E5%89%8D%E7%AB%AF/" rel="tag">笔记 ajax javascript 前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-css-%E5%89%8D%E7%AB%AF-html/" rel="tag">笔记 css 前端 html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-css3-html-%E5%89%8D%E7%AB%AF/" rel="tag">笔记 css3 html 前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-git/" rel="tag">笔记 git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-html-%E5%89%8D%E7%AB%AF/" rel="tag">笔记 html 前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-javascript/" rel="tag">笔记 javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-javascript-vue-js-%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/" rel="tag">笔记 javascript vue.js 开发语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-javascript-%E5%89%8D%E7%AB%AF/" rel="tag">笔记 javascript 前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-javascript-%E5%89%8D%E7%AB%AF-react-js/" rel="tag">笔记 javascript 前端 react.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-javascript-%E5%89%8D%E7%AB%AF-%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/" rel="tag">笔记 javascript 前端 开发语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-prototype/" rel="tag">笔记 prototype</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-%E5%85%B6%E4%BB%96/" rel="tag">笔记 其他</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-%E5%89%8D%E7%AB%AF/" rel="tag">笔记 前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-%E5%89%8D%E7%AB%AF-css3-html/" rel="tag">笔记 前端 css3 html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-%E5%89%8D%E7%AB%AF-html-asp-net/" rel="tag">笔记 前端 html asp.net</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-%E5%89%8D%E7%AB%AF-javascript/" rel="tag">笔记 前端 javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">笔记 大数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0-%E5%AD%A6%E4%B9%A0/" rel="tag">笔记 学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BD%95-java-html-%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">记录 java html 服务器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BD%95-javascript/" rel="tag">记录 javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BD%95-javascript-node-js/" rel="tag">记录 javascript node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BD%95-javascript-%E5%89%8D%E7%AB%AF/" rel="tag">记录 javascript 前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%B0%E5%BD%95-%E5%AD%A6%E4%B9%A0/" rel="tag">记录 学习</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E7%AC%94%E8%AE%B0-ajax-javascript-%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">笔记 ajax javascript 前端</a> <a href="/tags/%E7%AC%94%E8%AE%B0-css-%E5%89%8D%E7%AB%AF-html/" style="font-size: 10px;">笔记 css 前端 html</a> <a href="/tags/%E7%AC%94%E8%AE%B0-css3-html-%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">笔记 css3 html 前端</a> <a href="/tags/%E7%AC%94%E8%AE%B0-git/" style="font-size: 10px;">笔记 git</a> <a href="/tags/%E7%AC%94%E8%AE%B0-html-%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">笔记 html 前端</a> <a href="/tags/%E7%AC%94%E8%AE%B0-javascript/" style="font-size: 10px;">笔记 javascript</a> <a href="/tags/%E7%AC%94%E8%AE%B0-javascript-vue-js-%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">笔记 javascript vue.js 开发语言</a> <a href="/tags/%E7%AC%94%E8%AE%B0-javascript-%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">笔记 javascript 前端</a> <a href="/tags/%E7%AC%94%E8%AE%B0-javascript-%E5%89%8D%E7%AB%AF-react-js/" style="font-size: 10px;">笔记 javascript 前端 react.js</a> <a href="/tags/%E7%AC%94%E8%AE%B0-javascript-%E5%89%8D%E7%AB%AF-%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/" style="font-size: 10px;">笔记 javascript 前端 开发语言</a> <a href="/tags/%E7%AC%94%E8%AE%B0-prototype/" style="font-size: 10px;">笔记 prototype</a> <a href="/tags/%E7%AC%94%E8%AE%B0-%E5%85%B6%E4%BB%96/" style="font-size: 15px;">笔记 其他</a> <a href="/tags/%E7%AC%94%E8%AE%B0-%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">笔记 前端</a> <a href="/tags/%E7%AC%94%E8%AE%B0-%E5%89%8D%E7%AB%AF-css3-html/" style="font-size: 10px;">笔记 前端 css3 html</a> <a href="/tags/%E7%AC%94%E8%AE%B0-%E5%89%8D%E7%AB%AF-html-asp-net/" style="font-size: 10px;">笔记 前端 html asp.net</a> <a href="/tags/%E7%AC%94%E8%AE%B0-%E5%89%8D%E7%AB%AF-javascript/" style="font-size: 20px;">笔记 前端 javascript</a> <a href="/tags/%E7%AC%94%E8%AE%B0-%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 15px;">笔记 大数据</a> <a href="/tags/%E7%AC%94%E8%AE%B0-%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">笔记 学习</a> <a href="/tags/%E8%AE%B0%E5%BD%95-java-html-%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 10px;">记录 java html 服务器</a> <a href="/tags/%E8%AE%B0%E5%BD%95-javascript/" style="font-size: 10px;">记录 javascript</a> <a href="/tags/%E8%AE%B0%E5%BD%95-javascript-node-js/" style="font-size: 10px;">记录 javascript node.js</a> <a href="/tags/%E8%AE%B0%E5%BD%95-javascript-%E5%89%8D%E7%AB%AF/" style="font-size: 15px;">记录 javascript 前端</a> <a href="/tags/%E8%AE%B0%E5%BD%95-%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">记录 学习</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/08/">August 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/07/">July 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/06/">June 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/04/">April 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">March 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">February 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/01/">January 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/11/">November 2021</a></li></ul>
     </div>
   </div>
 
@@ -186,6 +670,18 @@
         
           <li>
             <a href="/2022/09/07/hello-world/">赵子豪个人博客</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/03/%E8%BF%AD%E4%BB%A3%E5%99%A8(iterator)%E5%8E%9F%E7%90%86/">迭代器(iterator)原理</a>
+          </li>
+        
+          <li>
+            <a href="/2022/08/14/%E5%9B%9E%E9%A1%BEexpress/">回顾express</a>
+          </li>
+        
+          <li>
+            <a href="/2022/08/07/%E6%8B%93%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%E6%98%AF%E6%B7%B1%E6%8B%B7%E8%B4%9D%E8%BF%98%E6%98%AF%E6%B5%85%E6%8B%B7%E8%B4%9D/">拓展运算符是深拷贝还是浅拷贝</a>
           </li>
         
       </ul>
