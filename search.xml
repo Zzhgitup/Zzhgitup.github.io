@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title></title>
+      <link href="/2022/09/09/websocket%E7%9A%84%E5%9F%BA%E7%A1%80/"/>
+      <url>/2022/09/09/websocket%E7%9A%84%E5%9F%BA%E7%A1%80/</url>
+      
+        <content type="html"><![CDATA[<h4 id="websocket的基础"><a href="#websocket的基础" class="headerlink" title="websocket的基础"></a>websocket的基础</h4><p>1.传统的是HTTP模式，</p><p>2.websocket 是一种网络传输协议，可在单个TCP连接进行全双工通信，位于OSI模型的应用层</p><p>​    特点：</p><ol><li>TCP连接，与HTTP协议兼容</li><li>双向通信，主动推送（服务端向客户端）</li><li>无同源限制，协议标识符是WS（加密wss）</li></ol><p>应用场景：</p><ul><li><input checked="" disabled="" type="checkbox"> 聊天，消息，点赞，</li><li><input checked="" disabled="" type="checkbox"> 直播弹幕</li><li><input checked="" disabled="" type="checkbox"> 游戏，协同编辑，基于位置的应用</li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>迭代器(iterator)原理</title>
       <link href="/2022/09/03/%E8%BF%AD%E4%BB%A3%E5%99%A8(iterator)%E5%8E%9F%E7%90%86/"/>
       <url>/2022/09/03/%E8%BF%AD%E4%BB%A3%E5%99%A8(iterator)%E5%8E%9F%E7%90%86/</url>
