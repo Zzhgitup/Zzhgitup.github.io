@@ -4,6 +4,50 @@
   
     
     <entry>
+      <title>JS语言基础（二）Number</title>
+      <link href="/2022/09/15/Number%E7%B1%BB%E5%9E%8B/"/>
+      <url>/2022/09/15/Number%E7%B1%BB%E5%9E%8B/</url>
+      
+        <content type="html"><![CDATA[<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> JS基础复习 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JS语言基础（一）</title>
+      <link href="/2022/09/15/JS%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/"/>
+      <url>/2022/09/15/JS%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/</url>
+      
+        <content type="html"><![CDATA[<h2 id="1-严格模式"><a href="#1-严格模式" class="headerlink" title="1.严格模式"></a>1.严格模式</h2><p>严格模式是一种不同的javascript解析和执行的模型，如果要对整个脚本开启严格模式在脚本开头加上<code>use strict</code>虽然看起来没有复制给任何变量的字符串吗，但它其实是一个预处理指令，任何支持JavaScript的引擎看到就会切换到严格模式，</p><h2 id="2-变量"><a href="#2-变量" class="headerlink" title="2.变量"></a>2.变量</h2><ul><li>var关键字</li><li>let关键字</li><li>const关键字<h2 id="3-暂时性死区"><a href="#3-暂时性死区" class="headerlink" title="3.暂时性死区"></a>3.暂时性死区</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//name会被提升</span><br><span class="line">console.log(name);//undefined</span><br><span class="line">var name=&quot;小明&quot;;</span><br><span class="line">//name不会提升</span><br><span class="line">console.log(name)//报错</span><br><span class="line">let name=&quot;小明&quot;;</span><br></pre></td></tr></table></figure>在let声明之前的执行瞬间被称为。暂时性死区，在此阶段引用任何后面声明的变量都会抛出<code>ReferenceError</code><h2 id="4-全局声明"><a href="#4-全局声明" class="headerlink" title="4.全局声明"></a>4.全局声明</h2>与var关键字不同，使用let在全局作用域中声明的变量不会成为window对象的属性（var声明的变量则会）;<h2 id="声明风格及最佳实践"><a href="#声明风格及最佳实践" class="headerlink" title="声明风格及最佳实践"></a>声明风格及最佳实践</h2></li><li>不使用var </li><li>const优先 ，let次之</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> JS基础复习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> javascript, </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>顺时针打印矩阵JS版</title>
       <link href="/2022/09/15/%E5%89%91%E6%8C%87%20Offer%2029.%20%E9%A1%BA%E6%97%B6%E9%92%88%E6%89%93%E5%8D%B0%E7%9F%A9%E9%98%B5(JS%E7%89%88)/"/>
       <url>/2022/09/15/%E5%89%91%E6%8C%87%20Offer%2029.%20%E9%A1%BA%E6%97%B6%E9%92%88%E6%89%93%E5%8D%B0%E7%9F%A9%E9%98%B5(JS%E7%89%88)/</url>
