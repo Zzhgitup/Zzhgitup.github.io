@@ -5,8 +5,8 @@
     
     <entry>
       <title>栈结构+一道算法</title>
-      <link href="/2022/09/15/Number%E7%B1%BB%E5%9E%8B/"/>
-      <url>/2022/09/15/Number%E7%B1%BB%E5%9E%8B/</url>
+      <link href="/2022/09/15/%E6%A0%88%E7%BB%93%E6%9E%84+%E7%AE%97%E6%B3%95/"/>
+      <url>/2022/09/15/%E6%A0%88%E7%BB%93%E6%9E%84+%E7%AE%97%E6%B3%95/</url>
       
         <content type="html"><![CDATA[<h2 id="1-栈（stack）"><a href="#1-栈（stack）" class="headerlink" title="1.栈（stack）"></a>1.栈（stack）</h2><p><img src="https://s2.loli.net/2022/09/16/PSWIgxmMZ4RKpF9.png" alt="QQ截图20220916150957.png"></p><ol><li>它是一种受限制的线性表，后见先出</li></ol><ul><li>其限制是仅允许在表的一端进行插入和删除操作，这一段被称为<code>栈顶</code>相对地把另一端称为<code>栈底</code></li><li>LIFO表示就是后进入的元素，带一个弹出栈空间，类似于自动餐托盘最后放上托盘，往往先拿出去使用</li><li>向一个栈插入新元素又称作<code>进栈</code>，<code>入栈</code>，或者<code>压栈</code>，他是把新元素放到栈顶元素的上面，使之成为新的栈顶元素</li><li>从一个栈删除元素又称作<code>出栈</code>，或者<code>退栈</code>，他是把栈顶元素删掉，使其相邻的元素成为新的栈顶元素。<h2 id="2-栈结构的实现"><a href="#2-栈结构的实现" class="headerlink" title="2.栈结构的实现"></a>2.栈结构的实现</h2><img src="https://s2.loli.net/2022/09/16/TYaosZUxe2y8bIv.png" alt="QQ截图20220916173538.png"><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> longestValidParentheses = <span class="keyword">function</span> (<span class="params">s</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> maxLen = <span class="number">0</span></span><br><span class="line">    <span class="keyword">let</span> stack = []</span><br><span class="line">    stack.<span class="title function_">push</span>(-<span class="number">1</span>) <span class="comment">// 初始化一个参照物</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; s.<span class="property">length</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[i] === <span class="string">&#x27;(&#x27;</span>) &#123;</span><br><span class="line">            <span class="comment">// ( 入栈   )出栈</span></span><br><span class="line">            stack.<span class="title function_">push</span>(i)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// )的情况 出栈</span></span><br><span class="line">            stack.<span class="title function_">pop</span>()</span><br><span class="line">            <span class="keyword">if</span> (stack.<span class="property">length</span>) &#123;</span><br><span class="line">                <span class="comment">// 每次出栈 计算下当前有效连续长度</span></span><br><span class="line">                <span class="comment">// 如何计算连续长度 当前位置 - 栈顶下标  并取值最大的有效长度</span></span><br><span class="line">                maxLen = <span class="title class_">Math</span>.<span class="title function_">max</span>(maxLen, i - stack[stack.<span class="property">length</span> - <span class="number">1</span>])</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                stack.<span class="title function_">push</span>(i) <span class="comment">//栈为空时 放入右括号参照物 表示从这个下标开始 需要重新计算长度</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxLen</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>利用栈结构解题</li></ul>]]></content>
       
@@ -63,7 +63,7 @@
       
       <categories>
           
-          <category> 记录 </category>
+          <category> 算法 </category>
           
       </categories>
       
