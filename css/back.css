@@ -11,11 +11,10 @@ img {
 /* CDN 服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
 #web_bg {
     /* 背景图像的地址（url括号里）  */
-    background: url(https://csdnimg.cn/release/cmsfe/public/img/skin-whitemove-bg.5a7e5126.gif) repeat;
+    background: url(https://w.wallhaven.cc/full/dp/wallhaven-dpv8lj.jpg);
     /* 背景图像不重复 */
     background-repeat: repeat;
     /* 背景图像大小 */
     background-size: cover;
   }
-  
   
