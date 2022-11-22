@@ -1,0 +1,13 @@
+.loading-img {
+    background: url(https://s2.loli.net/2022/09/16/fWagzr4qJDKn8E9.jpg) no-repeat center center;
+    background-size: cover;
+  }
+  body {
+    cursor:url(https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/img/default.cur),
+          default;
+  }
+  a,
+  img {
+    cursor:url(https://cdn.jsdelivr.net/gh/sviptzk/HexoStaticFile@latest/Hexo/img/pointer.cur),
+          default;
+  }
