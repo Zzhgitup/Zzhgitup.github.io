@@ -5908,11 +5908,11 @@ blockquote.pullquote.right {
     padding: 1rem 2rem;
     overflow: hidden;
   }
-  #content-inner{
+ /*  #content-inner{
     background-color: #f7f9fe;
     border-radius: 24px;
     max-width: 1400px !important;
-  }
+  } */
   #page:has(#about-page) {
     border: 0;
     box-shadow: none !important;
