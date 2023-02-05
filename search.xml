@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>git命令</title>
+      <link href="/2023/02/05/git%E5%91%BD%E4%BB%A4/"/>
+      <url>/2023/02/05/git%E5%91%BD%E4%BB%A4/</url>
+      
+        <content type="html"><![CDATA[<h2 id="导航-—-跳到之前的分支"><a href="#导航-—-跳到之前的分支" class="headerlink" title="导航 — 跳到之前的分支"></a>导航 — 跳到之前的分支</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">git checkout -</span><br></pre></td></tr></table></figure><h2 id="查看历史"><a href="#查看历史" class="headerlink" title="查看历史"></a>查看历史</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"># 每个提交在一行内显示</span><br><span class="line">git log --oneline</span><br><span class="line"></span><br><span class="line"># 在所有提交日志中搜索包含「homepage」的提交</span><br><span class="line">git log --all --grep=<span class="string">&#x27;homepage&#x27;</span></span><br><span class="line"></span><br><span class="line"># 获取某人的提交日志</span><br><span class="line">git log --author=<span class="string">&quot;Maxence&quot;</span></span><br></pre></td></tr></table></figure><h3 id="回退操作"><a href="#回退操作" class="headerlink" title="回退操作"></a>回退操作</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"># 获取所有操作历史</span><br><span class="line">git reflog</span><br><span class="line"></span><br><span class="line"># 重置到相应提交</span><br><span class="line">git reset <span class="variable constant_">HEAD</span>@&#123;<span class="number">4</span>&#125;</span><br><span class="line"># ……或者……</span><br><span class="line">git reset --hard &lt;提交的哈希值&gt;</span><br></pre></td></tr></table></figure><h3 id="清理仓库"><a href="#清理仓库" class="headerlink" title="清理仓库"></a>清理仓库</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">git fetch origin</span><br><span class="line">git checkout master</span><br><span class="line">git reset --hard origin/master</span><br></pre></td></tr></table></figure><h3 id="查看我的分支与master的不同"><a href="#查看我的分支与master的不同" class="headerlink" title="查看我的分支与master的不同"></a>查看我的分支与master的不同</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">git diff master..<span class="property">my</span>-branch</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 记录 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 笔记 前端 javascript </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>编写干净的JavaScript</title>
       <link href="/2023/01/16/%E7%BC%96%E5%86%99%E5%B9%B2%E5%87%80JavaScript/"/>
       <url>/2023/01/16/%E7%BC%96%E5%86%99%E5%B9%B2%E5%87%80JavaScript/</url>
