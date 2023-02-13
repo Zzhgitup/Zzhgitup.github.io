@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>错误日志1</title>
+      <link href="/2023/02/13/%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97/"/>
+      <url>/2023/02/13/%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97/</url>
+      
+        <content type="html"><![CDATA[<h2 id="vue2中axios请求遇到的问题"><a href="#vue2中axios请求遇到的问题" class="headerlink" title="vue2中axios请求遇到的问题"></a>vue2中axios请求遇到的问题</h2><p><img src="https://lmy-1311156074.cos.ap-nanjing.myqcloud.com/test/QQ%E6%88%AA%E5%9B%BE20230213091759.png"><br>当请求是报出如图上错误时，有两种情况</p><ol><li>就是错误的把axios当作插件在全局注册</li><li>就是我范的错误，<br><img src="https://lmy-1311156074.cos.ap-nanjing.myqcloud.com/test/QQ%E6%88%AA%E5%9B%BE20230213170505.png"><br><code>把axios的配置项写错了也会造成这样的结果</code></li></ol><p>虽然是个小问题，但是耽误了我几个小时，写代码一定要规范起来</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 记录 javascript node.js </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>本周学习笔记</title>
       <link href="/2023/02/13/%E5%81%87%E6%9C%9F%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
       <url>/2023/02/13/%E5%81%87%E6%9C%9F%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</url>
