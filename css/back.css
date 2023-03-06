@@ -12,6 +12,9 @@
           default;
   }
   /* 颜色 */
+#content-inner{
+  min-width: 1200px;
+}
 :root {
   --anzhiyu-theme-op: #4259ef23;
   --anzhiyu-card-bg-none: rgba(255, 255, 255, 0);
