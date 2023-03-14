@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>防抖与节流</title>
+      <link href="/2023/03/14/%E9%98%B2%E6%8A%96%E4%B8%8E%E8%8A%82%E6%B5%81/"/>
+      <url>/2023/03/14/%E9%98%B2%E6%8A%96%E4%B8%8E%E8%8A%82%E6%B5%81/</url>
+      
+        <content type="html"><![CDATA[<h3 id="防抖与节流"><a href="#防抖与节流" class="headerlink" title="防抖与节流"></a>防抖与节流</h3><p>复习一下</p><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">debounce</span>(<span class="params">fn,delay</span>)&#123;</span><br><span class="line"><span class="keyword">let</span> timerID=<span class="literal">null</span>;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line"><span class="keyword">const</span> context =<span class="variable language_">this</span>;</span><br><span class="line"><span class="keyword">if</span>(timeID)&#123;</span><br><span class="line"><span class="variable language_">window</span>.<span class="built_in">clearTimeout</span>(timerID);</span><br><span class="line">&#125;</span><br><span class="line">timerID = <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">fn.<span class="title function_">apply</span>(context,<span class="variable language_">arguments</span>);</span><br><span class="line">&#125;,delay)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">thottle</span>(<span class="params">fn</span>)&#123;<span class="comment">/* 节流 */</span></span><br><span class="line"><span class="keyword">let</span> cardu = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">if</span>(cardu)&#123;</span><br><span class="line">fn.<span class="title function_">apply</span>(<span class="variable language_">this</span>,<span class="variable language_">arguments</span>);</span><br><span class="line">cardu=<span class="literal">false</span>;</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">cardu = <span class="literal">true</span>;</span><br><span class="line">&#125;,<span class="number">3000</span>)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 记录 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>webpack5的vue配置</title>
       <link href="/2023/03/11/webpack/"/>
       <url>/2023/03/11/webpack/</url>
