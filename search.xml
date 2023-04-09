@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>手写Promise简单版</title>
+      <link href="/2023/04/09/%E6%89%8B%E5%86%99Promise/"/>
+      <url>/2023/04/09/%E6%89%8B%E5%86%99Promise/</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyPromise</span>&#123;</span><br><span class="line"><span class="title function_">constructor</span>(<span class="params">executor</span>)&#123;</span><br><span class="line">  <span class="comment">// 初始化state为等待态</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">state</span> = <span class="string">&#x27;pending&#x27;</span>;</span><br><span class="line">  <span class="comment">// 成功的值</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">value</span> = <span class="literal">undefined</span>;</span><br><span class="line">  <span class="comment">// 失败的原因</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">reason</span> = <span class="literal">undefined</span>;</span><br><span class="line">  <span class="keyword">let</span> <span class="title function_">resolve</span> = value =&gt; &#123;</span><br><span class="line"><span class="comment">// state改变,resolve调用就会失败</span></span><br><span class="line"><span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">state</span> === <span class="string">&#x27;pending&#x27;</span>) &#123;</span><br><span class="line">  <span class="comment">// resolve调用后，state转化为成功态</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">state</span> = <span class="string">&#x27;fulfilled&#x27;</span>;</span><br><span class="line">  <span class="comment">// 储存成功的值</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">value</span> = value;</span><br><span class="line">&#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">let</span> <span class="title function_">reject</span> = reason =&gt; &#123;</span><br><span class="line"><span class="comment">// state改变,reject调用就会失败</span></span><br><span class="line"><span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">state</span> === <span class="string">&#x27;pending&#x27;</span>) &#123;</span><br><span class="line">  <span class="comment">// reject调用后，state转化为失败态</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">state</span> = <span class="string">&#x27;rejected&#x27;</span>;</span><br><span class="line">  <span class="comment">// 储存失败的原因</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">reason</span> = reason;</span><br><span class="line">&#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="comment">// 如果executor执行报错，直接执行reject</span></span><br><span class="line">  <span class="keyword">try</span>&#123;</span><br><span class="line"><span class="title function_">executor</span>(resolve, reject);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line"><span class="title function_">reject</span>(err);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">then</span>(<span class="params">onFulfilled,onRejected</span>) &#123;</span><br><span class="line"><span class="comment">// 状态为fulfilled，执行onFulfilled，传入成功的值</span></span><br><span class="line"><span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">state</span> === <span class="string">&#x27;fulfilled&#x27;</span>) &#123;</span><br><span class="line">  <span class="title function_">onFulfilled</span>(<span class="variable language_">this</span>.<span class="property">value</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 状态为rejected，执行onRejected，传入失败的原因</span></span><br><span class="line"><span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="property">state</span> === <span class="string">&#x27;rejected&#x27;</span>) &#123;</span><br><span class="line">  <span class="title function_">onRejected</span>(<span class="variable language_">this</span>.<span class="property">reason</span>);</span><br><span class="line">&#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 记录 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> JS </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>浏览器如何渲染的</title>
       <link href="/2023/04/02/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
       <url>/2023/04/02/%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
